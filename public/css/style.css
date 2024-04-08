@@ -1,0 +1,139 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: arial;
+    scroll-behavior: smooth;
+}
+
+/* footer link */
+.col-6>a {
+    display: block;
+}
+
+/* shop now btn */
+
+#shop-btn{
+    background-color:#ff8100;
+}
+
+/* width of every cards on product section */
+#card-width {
+    width: 18rem;
+}
+
+
+/* categories nav link */
+
+.me-3 me-md-5{
+    font-size: 20px;
+    size: 200px;
+}
+/* Adjust the size of the logo */
+.navbar-brand img {
+    width: 150px; /* Adjust the width as needed */
+    height: auto; /* Let the height adjust proportionally */
+    margin-right: 10px; /* Add some margin to separate the logo from the search box */
+}
+
+
+@media (max-width: 768.98px) {
+    #input-form {
+        width: 35%;
+    }
+}
+
+
+
+/* responsive blog post. modify the width of image in each breakpoints */
+
+@media (min-width: 768px) {
+    .bg {
+        width: 350px;
+    }
+}
+
+@media (min-width: 992px) {
+    .bg {
+        width: 230px;
+
+    }
+}
+
+@media (min-width: 1200px) {
+    .bg {
+        width: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .bg {
+        width: 250px;
+    }
+}
+
+@media (max-width: 578px) {
+    .bg {
+        width: 100%;
+    }
+}
+/* Resize the footer logo */
+.footer-logo {
+    max-width: 100px; /* Adjust the maximum width as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+.navbar-links {
+    display: flex;
+    justify-content: center; /* Horizontally center the links */
+    align-items: center; /* Vertically center the links */
+}
+
+.navbar-nav {
+    margin: 0; /* Remove default margin */
+}
+
+.nav-link {
+    padding: 0 10px; /* Add padding to the links for spacing */
+}
+
+.background-image-cut {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 110%;
+    background-image: url('/img/Ourbg.png');
+    background-size: cover;
+    background-position: center;
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+}
+
+h1.display-3 {
+    font-size: 2.5rem; /* Adjust the font size as needed */
+}
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    flex: 1 1 calc(25% - 20px);
+    max-width: calc(25% - 20px);
+}
+
+.section-title {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    
+}
+
+.show-more-btn {
+    margin-top: 20px;
+}
+#headingTopic{
+    text-align: center !important;
+    margin-top: 90px;
+}
+h1.text-center {
+    margin-top: 82px;
+}
