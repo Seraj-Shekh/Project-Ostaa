@@ -67,37 +67,73 @@
   </nav>
   
 
-  <!-- Login Section -->
-  <div class="container mt-5 ">
-    <div class="row">
-      <div class="col-md-6">
-        <!-- Dummy image, replace with real image -->
-        <img src="/img/login.jpg" class="img-fluid" alt="Dummy Image">
-      </div>
-      <div class="col-md-6">
-        <div class="login-container mt-4">
-          <h2 class="mb-4">Login</h2>
-          <form method="post" action="/users/login">
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="Enter email">
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" placeholder="Password">
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Login</button>
-          </form>
-          <div class="mt-3">
-            <a href="#">Forgot your password?</a>
+ <!-- Login Section -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <!-- Dummy image, replace with real image -->
+      <img src="/img/login.jpg" class="img-fluid" alt="Dummy Image">
+    </div>
+    <div class="col-md-6">
+      <div class="login-container mt-4">
+        <h2 class="mb-4">Login</h2>
+        <form id="login-form" method="post" action="/users/login">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
           </div>
-          <div class="mt-3">
-            <p>Don't have an account? <a href="/users/register">Register</a></p>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
           </div>
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+        <div class="mt-3">
+          <a href="#">Forgot your password?</a>
+        </div>
+        <div class="mt-3">
+          <p>Don't have an account? <a href="/users/register">Register</a></p>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<script>
+  document.getElementById('login-form').addEventListener('submit', async (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    const formData = new FormData(event.target); // Get form data
+    const email = formData.get('email');
+    const password = formData.get('password');
+
+    try {
+      const response = await fetch('/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await response.json();
+
+      if (data.success) {
+        // Display success message
+        alert('Login successful');
+        // Redirect to home page
+        window.location.href = '/';
+      } else {
+        // Display error message
+        alert(data.error);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Display error message
+      alert('An error occurred. Please try again later.');
+    }
+  });
+</script>
+
 
   <!-- Footer -->
   <footer class="py-5 bg-light mt-5">

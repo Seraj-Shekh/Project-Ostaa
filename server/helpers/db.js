@@ -1,3 +1,4 @@
+// helpers/db.js
 const { Pool } = require('pg');
 
 // Load environment variables from .env file
