@@ -116,24 +116,60 @@ h1.display-3 {
     gap: 20px;
 }
 
+/* Custom styling for product cards */
 .card {
-    flex: 1 1 calc(25% - 20px);
-    max-width: calc(25% - 20px);
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
 }
 
-.section-title {
-    margin-top: 30px;
-    margin-bottom: 20px;
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-top {
+    height: 200px; /* Adjust height as needed */
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card-title {
+    font-size: 1.2rem;
+}
+
+.card-text {
+    font-size: 1rem;
+}
+
+.add-to-cart-btn,
+.add-to-wishlist-btn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 991.98px) {
+    .card {
+        flex: 1 1 calc(33.33% - 20px);
+        max-width: calc(33.33% - 20px);
+    }
+}
+
+@media (max-width: 767.98px) {
+    .card {
+        flex: 1 1 calc(50% - 20px);
+        max-width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 575.98px) {
+    .card {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+.mb-5 {
     
-}
-
-.show-more-btn {
-    margin-top: 20px;
-}
-#headingTopic{
-    text-align: center !important;
-    margin-top: 90px;
-}
-h1.text-center {
-    margin-top: 82px;
+    margin-top: 92px;
 }

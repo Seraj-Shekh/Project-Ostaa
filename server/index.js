@@ -22,7 +22,7 @@ app.use(express.static('public'))
 
 // Routes
 app.use('/', userAuth);
-app.use('/products', productRoutes);
+app.use('/products', productRoutes); //mounting the products routes
 app.use('/contact', contactRoutes);
 
 // server the static files

@@ -127,45 +127,36 @@
 
 
 
-    <!--  New section -->
-
-    <div class="container">
-
-        <h1 class="text-center mb-4" id="headingTopic">Our Products</h1>
-    
-        <h3 class="section-title">Tools and Furniture</h3>
-        <div id="tools-furniture-products" class="product-container">
-            <!-- Product Cards will be added dynamically here -->
+  <!-- Product Card Template -->
+<template id="product-card-template">
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card h-100">
+            <img class="card-img-top" alt="">
+            <div class="card-body">
+                <h5 class="card-title"></h5>
+                <p class="card-text"></p>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                <button class="btn btn-outline-primary add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
+            </div>
         </div>
-        <div class="text-center">
-            <button id="show-more-tools-furniture" class="btn btn-primary show-more-btn">Show More</button>
-        </div>
-    
-        <h3 class="section-title">Students Materials</h3>
-        <div id="students-materials-products" class="product-container">
-            <!-- Product Cards will be added dynamically here -->
-        </div>
-        <div class="text-center">
-            <button id="show-more-students-materials" class="btn btn-primary show-more-btn">Show More</button>
-        </div>
-    
-        <h3 class="section-title">Clothes and Accessories</h3>
-        <div id="clothes-accessories-products" class="product-container">
-            <!-- Product Cards will be added dynamically here -->
-        </div>
-        <div class="text-center">
-            <button id="show-more-clothes-accessories" class="btn btn-primary show-more-btn">Show More</button>
-        </div>
-    
-        <h3 class="section-title">Electronics</h3>
-        <div id="electronics-products" class="product-container">
-            <!-- Product Cards will be added dynamically here -->
-        </div>
-        <div class="text-center">
-            <button id="show-more-electronics" class="btn btn-primary show-more-btn">Show More</button>
-        </div>
-    
     </div>
+</template>
+
+<!-- Products Container -->
+<div class="container mt-5 md-5" id="products-container">
+    <h1 class="text-center mb-5" id="headingTopic">Our Products</h1>
+    <div class="row" id="product-row">
+        <!-- Product Cards will be added dynamically here -->
+    </div>
+    <div class="text-center">
+        <button id="show-more" class="btn btn-primary show-more-btn">Show More</button>
+    </div>
+</div>
+
+
+
     
     
 

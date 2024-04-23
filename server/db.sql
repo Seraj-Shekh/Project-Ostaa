@@ -21,3 +21,21 @@ CREATE TABLE contact_submissions (
     message TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+--product table
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    price NUMERIC(10, 2) NOT NULL,
+    image_url VARCHAR(255) NOT NULL
+);
+INSERT INTO products (name, price, image_url) VALUES
+('Product 1', 100.00, 'img/blue-bag.jpg'),
+('Product 2', 150.00, 'img/blue-bag.jpg'),
+('Product 3', 200.00, 'img/blue-bag.jpg');
+('Product 1', 100.00, 'img/blue-bag.jpg'),
+('Product 2', 150.00, 'img/blue-bag.jpg'),
+('Product 3', 200.00, 'img/blue-bag.jpg');
+('Product 1', 100.00, 'img/blue-bag.jpg'),
+('Product 2', 150.00, 'img/blue-bag.jpg'),
+('Product 3', 200.00, 'img/blue-bag.jpg');
+-- Add more sample products as needed
