@@ -6,6 +6,8 @@ CREATE TABLE users (
 );
 ALTER TABLE users ADD COLUMN token VARCHAR(255);
 
+-- Altering the users table to add the reset_token column for forgot password functionality
+ALTER TABLE users ADD COLUMN reset_token VARCHAR(255);
 
 INSERT INTO users (name, email, password) VALUES 
 ('John Doe', 'john@example.com', 'password123'),
