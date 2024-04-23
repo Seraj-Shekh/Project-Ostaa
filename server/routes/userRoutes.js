@@ -1,8 +1,6 @@
-// routes/userRoutes.js
 const express = require('express');
 const router = express.Router();
-const { register, login } = require('../controllers/auth-controller');
-const authenticateUser = require('../middleware/authMiddleware');
+const { register, login, forgotPassword, resetPassword } = require('../controllers/auth-controller');
 
 router.get('/', (req, res) => {
     res.render('index');
@@ -24,5 +22,19 @@ router.get('/users/register', (req, res) => {
 });
 
 router.post('/users/register', register);
+
+// Forgot Password Routes
+router.get('/users/forgot-password', (req, res) => {
+    res.render('forgot-password');
+});
+
+router.post('/users/forgot-password', forgotPassword);
+
+router.get('/users/reset-password/:token', (req, res) => {
+    const { token } = req.params;
+    res.render('reset-password', { token });
+});
+
+router.post('/users/reset-password/:token', resetPassword);
 
 module.exports = router;
