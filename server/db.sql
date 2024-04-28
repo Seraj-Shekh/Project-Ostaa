@@ -32,10 +32,10 @@ INSERT INTO products (name, price, image_url) VALUES
 ('Product 1', 100.00, 'img/blue-bag.jpg'),
 ('Product 2', 150.00, 'img/blue-bag.jpg'),
 ('Product 3', 200.00, 'img/blue-bag.jpg');
-('Product 1', 100.00, 'img/blue-bag.jpg'),
-('Product 2', 150.00, 'img/blue-bag.jpg'),
-('Product 3', 200.00, 'img/blue-bag.jpg');
-('Product 1', 100.00, 'img/blue-bag.jpg'),
-('Product 2', 150.00, 'img/blue-bag.jpg'),
-('Product 3', 200.00, 'img/blue-bag.jpg');
+('Product 4', 100.00, 'img/blue-bag.jpg'),
+('Product 5', 150.00, 'img/blue-bag.jpg'),
+('Product 6', 200.00, 'img/blue-bag.jpg');
+('Product 7', 100.00, 'img/blue-bag.jpg'),
+('Product 8', 150.00, 'img/blue-bag.jpg'),
+('Product 9', 200.00, 'img/blue-bag.jpg');
 -- Add more sample products as needed
