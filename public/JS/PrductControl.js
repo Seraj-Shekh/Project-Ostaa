@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     fetchProducts();
+    updateCartUI(); // Update cart UI including the cart notification count on page load
 });
 
 async function fetchProducts() {
@@ -8,14 +9,13 @@ async function fetchProducts() {
         const products = await response.json();
         const productsContainer = document.getElementById('product-row');
         productsContainer.innerHTML = generateProductCards(products);
-        
+
         // Add event listeners to "Add to Cart" buttons
         const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
         addToCartButtons.forEach(button => {
             button.addEventListener('click', addToCart);
         });
 
-       
     } catch (error) {
         console.error('Error fetching products:', error);
     }
@@ -44,23 +44,53 @@ function generateProductCards(products) {
 }
 
 async function addToCart(event) {
-    
     const button = event.target;
     const card = button.parentElement.parentElement;
     const productName = card.querySelector('.card-title').textContent;
     const productPrice = card.querySelector('.card-text').textContent.replace('$', '');
     const productImageUrl = card.querySelector('.card-img-top').src;
 
-    // Corrected the function call to addToCartToLocalStorage
     await addToCartToLocalStorage(productName, productPrice, productImageUrl);
-    
+
+    // Create a new element for the "Item added" message
+    const itemAddedMessage = document.createElement('div');
+    itemAddedMessage.textContent = 'Item added';
+    itemAddedMessage.classList.add('item-added-animation');
+
+    // Append the "Item added" message to the button's parent container
+    button.parentElement.appendChild(itemAddedMessage);
+
+    // Hide the "Add to Cart" button temporarily
+    button.classList.add('hidden');
+
+    // Remove the "Item added" message and show the "Add to Cart" button again after the animation ends
+    itemAddedMessage.addEventListener('animationend', () => {
+        itemAddedMessage.remove();
+        button.classList.remove('hidden');
+    });
+
     // Update cart UI
     updateCartUI();
 }
+
+// Add event listeners to "Add to Cart" buttons
+const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+addToCartButtons.forEach(button => {
+    button.addEventListener('click', addToCart);
+});
+
 // Function to update the cart UI
 function updateCartUI() {
     // Retrieve cart from localStorage
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Get the cart notification element
+    const cartNotification = document.getElementById('cart-notification');
+
+    // Update the cart notification count
+    if (cartNotification) {
+        cartNotification.textContent = cart.length.toString() || '0'; // Display the number of products in the cart or '0' if empty
+    }
 
     // Get the cart table body element
     const cartTableBody = document.querySelector('tbody');
@@ -81,7 +111,7 @@ function updateCartUI() {
                 <td><button class="btn btn-danger" onclick="removeFromCart('${product.name}')">Remove</button></td>
             `;
             cartTableBody.appendChild(row);
-            
+
             // Add the price of each product to the subtotal
             subtotal += parseFloat(product.price);
         });
@@ -103,7 +133,6 @@ function updateCartUI() {
     }
 }
 
-
 // Function to add a product to the cart in localStorage
 function addToCartToLocalStorage(productName, productPrice, productImageUrl) {
     // Retrieve cart from localStorage
@@ -115,7 +144,6 @@ function addToCartToLocalStorage(productName, productPrice, productImageUrl) {
     // Update cart in localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
 }
-
 
 // Modify the function to redirect to the /mycart route with cart data as a query parameter
 function goToCart() {

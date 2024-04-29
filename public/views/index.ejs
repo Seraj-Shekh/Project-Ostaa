@@ -50,11 +50,12 @@
                     <i class="fa-solid fa-heart me-lg-2"></i>
                     <p class="d-none d-lg-inline">Wishlist</p>
                 </a>
-                <a type="button" class="btn btn-outline-primary fw-500 rounded "onclick="goToCart()">
+                <a type="button" class="btn btn-outline-primary fw-500 rounded" onclick="goToCart()">
                     <i class="fa-solid fa-cart-shopping me-lg-2"></i>
+                    <span id="cart-notification" class="cart-notification"></span> <!-- Notification area -->
                     <p class="d-none d-lg-inline">My Cart</p>
-
                 </a>
+                
             </div>
 
 
@@ -101,7 +102,7 @@
 
 
 
-  <!-- Product Card Template -->
+ <!-- Product Card Template -->
 <template id="product-card-template">
     <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
         <div class="card h-100">
@@ -117,6 +118,7 @@
         </div>
     </div>
 </template>
+
 
 <!-- Products Container -->
 <div class="container mt-5 md-5" id="products-container">
