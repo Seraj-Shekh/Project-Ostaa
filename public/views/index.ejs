@@ -21,11 +21,7 @@
     <script src="https://kit.fontawesome.com/f4e855eb8f.js" crossorigin="anonymous"></script>
     <!-- Add this inside your <head> tag -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        .navbar-nav .dropdown-menu {
-            font-size: 0.90rem; /* Adjust the font size here */
-        }
-    </style>
+   
 </head>
 
 <body>
@@ -44,7 +40,7 @@
                 aria-expanded="false">All type</button>
             <button title="Search" class="btn btn-primary d-none d-lg-block"><i
                     class="fa-solid fa-magnifying-glass rounded d-none d-lg-block"></i></button>
-
+            
             <div class="ms-md-5 mt-2 mt-md-0">
                 <a type="button" class="btn btn-outline-primary fw-500 rounded " href="/users/login">
                     <i class="fa-solid fa-user me-lg-2"></i>
@@ -54,7 +50,7 @@
                     <i class="fa-solid fa-heart me-lg-2"></i>
                     <p class="d-none d-lg-inline">Wishlist</p>
                 </a>
-                <a type="button" class="btn btn-outline-primary fw-500 rounded ">
+                <a type="button" class="btn btn-outline-primary fw-500 rounded "onclick="goToCart()">
                     <i class="fa-solid fa-cart-shopping me-lg-2"></i>
                     <p class="d-none d-lg-inline">My Cart</p>
 
@@ -76,18 +72,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategories" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Categories
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownCategories">
-                            <li><a class="dropdown-item" href="electronics.html">Electronics</a></li>
-                            <li><a class="dropdown-item" href="#">Clothing & Accessories</a></li>
-                            <li><a class="dropdown-item" href="#">Tools & Furniture</a></li>
-                            <li><a class="dropdown-item" href="#">Study Materials</a></li>
-                        </ul>
-                    </li>
+                 
                     <li class="nav-item">
                         <a class="nav-link" href="/products/blog">Blog</a>
                     </li>
@@ -95,24 +80,13 @@
                         <a class="nav-link" href="/products/aboutUs">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/products/contactUs">Contact us</a>
+                        <a class="nav-link" href="/products/contactUs">Contact Us</a>
                     </li>
                 </ul>
             </div>
         </nav>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var dropdownMenu = document.querySelector('.navbar .dropdown');
-            dropdownMenu.addEventListener('mouseover', function (event) {
-                event.stopPropagation();
-                dropdownMenu.querySelector('.dropdown-menu').classList.add('show');
-            });
-            dropdownMenu.addEventListener('mouseleave', function () {
-                dropdownMenu.querySelector('.dropdown-menu').classList.remove('show');
-            });
-        });
-    </script>
+   
     <!-- Content --->
     <div class="py-5 position-relative">
         <div class="background-image-cut"></div>

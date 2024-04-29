@@ -13,6 +13,12 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/mycart', (req, res) => {
+    const cart = JSON.parse(req.query.cart );
+    res.render('mycart', { cart });
+});
+
+
 router.get('/aboutUs', (req, res) => {
     res.render('aboutUs');
 })
