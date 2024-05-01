@@ -44,9 +44,9 @@
                     <div class="card-body">
                         <h2 class="card-title">Apply Coupon</h2>
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Enter coupon code">
+                            <input id="coupon-input" type="text" class="form-control" placeholder="Enter coupon code">
                             <div class="input-group-append">
-                                <button class="btn btn-success">Apply</button>
+                                <button id="apply-coupon-btn" class="btn btn-success">Apply</button>
                             </div>
                         </div>
                     </div>
@@ -67,7 +67,9 @@
                             </tr>
                             <tr>
                                 <td>Discount</td>
-                                <td>$0.00</td> <!-- Assuming no discounts for now -->
+                                <td id="discount">$
+                                    0.00 <!-- Display the discount amount -->
+                                </td>
                             </tr>
                             <tr>
                                 <td>Total (inc. taxes)</td>
@@ -91,7 +93,44 @@
 </div>
 
     <script>
-        // Function to update the cart UI
+        // JavaScript logic for applying coupon code discount
+document.addEventListener('DOMContentLoaded', () => {
+    const applyCouponButton = document.getElementById('apply-coupon-btn');
+    applyCouponButton.addEventListener('click', applyCoupon);
+});
+
+function applyCoupon() {
+    const couponInput = document.getElementById('coupon-input');
+    const couponCode = couponInput.value.trim();
+
+    // Check if the entered coupon code matches the predefined one
+    if (couponCode === 'MEIJA&JONNE') {
+        // Apply $20 discount
+        applyDiscount(20);
+        alert('Coupon applied successfully! $20 discount has been applied.');
+    } else {
+        alert('Invalid coupon code. Please try again.');
+    }
+}
+
+function applyDiscount(discountAmount) {
+    // Retrieve current total from the UI
+    const totalElement = document.getElementById('total');
+    let total = parseFloat(totalElement.textContent.replace('$', ''));
+
+    // Apply discount
+    total -= discountAmount;
+
+    // Update total in the UI
+    totalElement.textContent = `$${total.toFixed(2)}`;
+
+    // Update discount amount in the UI
+    const discountElement = document.getElementById('discount');
+    if (discountElement) {
+        discountElement.textContent = `$${discountAmount.toFixed(2)}`;
+    }
+}
+
 // Function to update the cart UI
 function updateCartUI() {
     // Retrieve cart from localStorage
@@ -138,8 +177,7 @@ function updateCartUI() {
     }
 }
 
-
-       // Function to remove a product from the cart
+// Function to remove a product from the cart
 function removeFromCart(productName) {
     // Retrieve cart from localStorage
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
