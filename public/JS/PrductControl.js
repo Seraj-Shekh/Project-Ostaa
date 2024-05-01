@@ -75,6 +75,13 @@ async function addToCart(event) {
     const productPrice = card.querySelector('.card-text').textContent.replace('$', '');
     const productImageUrl = card.querySelector('.card-img-top').src;
 
+    //check if the user is logged in
+    const token = localStorage.getItem('token')
+    if(token){
+        alert('You need to login first');
+        return;
+    }
+
     await addToCartToLocalStorage(productName, productPrice, productImageUrl);
 
     // Create a new element for the "Item added" message
@@ -104,6 +111,13 @@ async function addToWishlist(event) {
     const productName = card.querySelector('.card-title').textContent;
     const productPrice = card.querySelector('.card-text').textContent.replace('$', '');
     const productImageUrl = card.querySelector('.card-img-top').src;
+
+       //check if the user is logged in
+       const token = localStorage.getItem('token')
+       if(token){
+           alert('You need to login first');
+           return;
+       }
 
     addToWishlistToLocalStorage(productName, productPrice, productImageUrl);
 
