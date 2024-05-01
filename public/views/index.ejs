@@ -21,13 +21,13 @@
     <script src="https://kit.fontawesome.com/f4e855eb8f.js" crossorigin="anonymous"></script>
     <!-- Add this inside your <head> tag -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-   
+
 </head>
 
 <body>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             // Check if JWT token exists in local storage
             const token = localStorage.getItem('token');
             if (token) {
@@ -35,25 +35,25 @@
                 document.getElementById('signin-btn').style.display = 'none';
                 const profileBtn = document.getElementById('profile-btn');
                 profileBtn.style.display = 'inline-block';
-    
+
                 // Create and append logout button
                 const logoutBtn = document.createElement('button');
                 logoutBtn.classList.add('btn', 'btn-outline-primary', 'fw-500', 'rounded', 'd-none'); // initially hide the logout button
                 logoutBtn.innerHTML = '<i class="fa-solid fa-sign-out-alt me-lg-2"></i><p class="d-none d-lg-inline">Logout</p>';
                 profileBtn.appendChild(logoutBtn);
-    
+
                 // Add event listener for hover
-                profileBtn.addEventListener('mouseenter', function() {
+                profileBtn.addEventListener('mouseenter', function () {
                     logoutBtn.classList.remove('d-none'); // show the logout button on hover
                 });
-    
+
                 // Add event listener for mouse leave to hide logout button
-                profileBtn.addEventListener('mouseleave', function() {
+                profileBtn.addEventListener('mouseleave', function () {
                     logoutBtn.classList.add('d-none'); // hide the logout button when mouse leaves
                 });
-    
+
                 // Add click event listener to logout button
-                logoutBtn.addEventListener('click', function() {
+                logoutBtn.addEventListener('click', function () {
                     // Perform logout action (clear token, redirect to logout route, etc.)
                     localStorage.removeItem('token');
                     // Redirect to logout route
@@ -66,9 +66,9 @@
             }
         });
     </script>
-    
-    
-    
+
+
+
 
     <div class="container pt-3">
 
@@ -76,24 +76,22 @@
             <a class="navbar-brand" href="#"> <img alt="logo" class="me-3 me-md-5" src="/img/OstaaLogo.png"></img></a>
             <!--LOGO!-->
 
-            <input type="text" id="input-form" class="form-control" placeholder="Search"
-                aria-label="Text input with dropdown button">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">All type</button>
+            <input type="text" id="input-form" class="form-control" placeholder="Search">
             <button title="Search" class="btn btn-primary d-none d-lg-block"><i
                     class="fa-solid fa-magnifying-glass rounded d-none d-lg-block"></i></button>
-            
+
             <div class="ms-md-5 mt-2 mt-md-0">
                 <a type="button" id="signin-btn" class="btn btn-outline-primary fw-500 rounded" href="/users/login">
                     <i class="fa-solid fa-user me-lg-2"></i>
                     <p class="d-none d-lg-inline">Sign in</p>
                 </a>
-                <a type="button" id="profile-btn" class="btn btn-outline-primary fw-500 rounded" href="/users/login" style="display: none;">
+                <a type="button" id="profile-btn" class="btn btn-outline-primary fw-500 rounded" href="/users/login"
+                    style="display: none;">
                     <i class="fa-solid fa-user me-lg-2"></i>
                     <p class="d-none d-lg-inline">Profile</p>
                 </a>
-                
-                
+
+
                 <a type="button" class="btn btn-outline-primary fw-500 rounded" onclick="goToWishlist()">
                     <i class="fa-solid fa-heart me-lg-2"></i>
                     <span id="wish-notification" class="wish-notification"></span> <!-- Notification area -->
@@ -104,7 +102,7 @@
                     <span id="cart-notification" class="cart-notification"></span> <!-- Notification area -->
                     <p class="d-none d-lg-inline">My Cart</p>
                 </a>
-                
+
             </div>
 
 
@@ -122,7 +120,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
-                 
+
                     <li class="nav-item">
                         <a class="nav-link" href="/products/blog">Blog</a>
                     </li>
@@ -136,7 +134,7 @@
             </div>
         </nav>
     </div>
-   
+
     <!-- Content --->
     <div class="py-5 position-relative">
         <div class="background-image-cut"></div>
@@ -151,39 +149,39 @@
 
 
 
- <!-- Product Card Template -->
-<template id="product-card-template">
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-        <div class="card h-100">
-            <img class="card-img-top" alt="">
-            <div class="card-body">
-                <h5 class="card-title"></h5>
-                <p class="card-text"></p>
-            </div>
-            <div class="card-footer">
-                <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
-                <button class="btn btn-outline-primary add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
+    <!-- Product Card Template -->
+    <template id="product-card-template">
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top" alt="">
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text"></p>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                    <button class="btn btn-outline-primary add-to-wishlist-btn"><i class="fas fa-heart"></i></button>
+                </div>
             </div>
         </div>
+    </template>
+
+
+    <!-- Products Container -->
+    <div class="container mt-5 md-5" id="products-container">
+        <h1 class="text-center mb-5" id="headingTopic">Our Products</h1>
+        <div class="row" id="product-row">
+            <!-- Product Cards will be added dynamically here -->
+        </div>
+        <div class="text-center">
+            <button id="show-more" class="btn btn-primary show-more-btn">Show More</button>
+        </div>
     </div>
-</template>
-
-
-<!-- Products Container -->
-<div class="container mt-5 md-5" id="products-container">
-    <h1 class="text-center mb-5" id="headingTopic">Our Products</h1>
-    <div class="row" id="product-row">
-        <!-- Product Cards will be added dynamically here -->
-    </div>
-    <div class="text-center">
-        <button id="show-more" class="btn btn-primary show-more-btn">Show More</button>
-    </div>
-</div>
 
 
 
-    
-    
+
+
 
     <!--  New section -->
     <div class="py-5 px-3">
@@ -336,7 +334,7 @@
                     </div>
                     <p class="mt-4 text-muted">© All rights reserved.</p>
                 </div>
-    
+
                 <!-- Newsletter Section -->
                 <div class="col-lg-8">
                     <div class="row">
@@ -347,16 +345,17 @@
                             <a href="#" class="text-decoration-none text-muted">Categories</a><br>
                             <a href="#" class="text-decoration-none text-muted">Blogs</a><br>
                         </div>
-    
+
                         <div class="col-md-6 col-lg-7 mt-3 mt-md-0">
                             <h6 class="h6 fw-bold">Newsletter</h6>
                             <p class="text-muted">Stay in touch with latest updates about our products and offers</p>
-    
+
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Email" aria-label="Email"
                                     aria-describedby="basic-addon2">
                                 <div class="input-group-append">
-                                    <button class="btn btn-secondary" type="button" style="background-color: blue;">Join</button>
+                                    <button class="btn btn-secondary" type="button"
+                                        style="background-color: blue;">Join</button>
                                 </div>
                             </div>
                         </div>
@@ -365,7 +364,7 @@
             </div>
         </div>
     </div>
-    
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"

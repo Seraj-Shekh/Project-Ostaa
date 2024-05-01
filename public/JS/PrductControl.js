@@ -25,8 +25,33 @@ async function fetchProducts() {
         console.error('Error fetching products:', error);
     }
 }
+// Function to fetch search results
+async function fetchSearchResults(query) {
+    try {
+        const response = await fetch(`/products/search?query=${query}`);
+        const searchResults = await response.json();
+        const productsContainer = document.getElementById('product-row');
+        productsContainer.innerHTML = generateProductCards(searchResults);
+    } catch (error) {
+        console.error('Error fetching search results:', error);
+    }
+}
 
-// Other functions remain unchanged
+// Modify fetchProducts() to handle search results fetching as well
+async function fetchProducts(query = '') {
+    try {
+        let url = '/products';
+        if (query) {
+            url += `/search?query=${encodeURIComponent(query)}`;
+        }
+        const response = await fetch(url);
+        const products = await response.json();
+        const productsContainer = document.getElementById('product-row');
+        productsContainer.innerHTML = generateProductCards(products);
+    } catch (error) {
+        console.error('Error fetching products:', error);
+    }
+}
 
 
 
@@ -129,7 +154,12 @@ const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
 addToCartButtons.forEach(button => {
     button.addEventListener('click', addToCart);
 });
-
+// Add event listener for search input
+const searchInput = document.getElementById('input-form');
+searchInput.addEventListener('input', (event) => {
+    const query = event.target.value;
+    fetchProducts(query); // Fetch products based on search query
+});
 
 // Function to update the cart UI
 function updateCartUI() {

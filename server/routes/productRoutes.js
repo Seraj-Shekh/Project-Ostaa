@@ -13,6 +13,18 @@ router.get('/', async (req, res) => {
     }
 })
 
+// Route to search for products 
+router.get('/search', async (req, res) => {
+    const { query } = req.query;
+    try {
+        const searchQuery = `%${query}%`; // Add wildcards to search for partial matches
+        const searchResults = await pool.query('SELECT * FROM products WHERE name ILIKE $1', [searchQuery]);
+        res.json(searchResults.rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 router.get('/mycart', (req, res) => {
     const cart = JSON.parse(req.query.cart );
     res.render('mycart', { cart });
