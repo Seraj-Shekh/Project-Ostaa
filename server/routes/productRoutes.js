@@ -18,6 +18,10 @@ router.get('/mycart', (req, res) => {
     res.render('mycart', { cart });
 });
 
+router.get('/mywishlist', (req, res) => {
+    const wishlist = JSON.parse(req.query.wishlist || '[]');
+    res.render('mywishlist', { wishlist });
+});
 
 router.get('/aboutUs', (req, res) => {
     res.render('aboutUs');

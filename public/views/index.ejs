@@ -43,11 +43,12 @@
             
             <div class="ms-md-5 mt-2 mt-md-0">
                 <a type="button" class="btn btn-outline-primary fw-500 rounded " href="/users/login">
-                    <i class="fa-solid fa-user me-lg-2"></i>
-                    <p class="d-none d-lg-inline">Sign in</p>
-                </a>
-                <a type="button" class="btn btn-outline-primary fw-500 rounded">
+                        <i class="fa-solid fa-user me-lg-2"></i>
+                        <p class="d-none d-lg-inline">Sign in</p>
+                    </a>
+                <a type="button" class="btn btn-outline-primary fw-500 rounded" onclick="goToWishlist()">
                     <i class="fa-solid fa-heart me-lg-2"></i>
+                    <span id="wish-notification" class="wish-notification"></span> <!-- Notification area -->
                     <p class="d-none d-lg-inline">Wishlist</p>
                 </a>
                 <a type="button" class="btn btn-outline-primary fw-500 rounded" onclick="goToCart()">

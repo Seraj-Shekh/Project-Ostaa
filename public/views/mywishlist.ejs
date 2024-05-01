@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12"> <!-- Change col-md-8 to col-md-12 to take full width -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th></th> <!-- Remove the empty header -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% wishlist.forEach(product=> { %>
+                            <tr>
+                                <td><img src="<%= product.imageUrl %>" alt="<%= product.name %>"
+                                        style="max-width: 100px;"></td>
+                                <td>
+                                    <%= product.name %>
+                                </td>
+                                <td>$
+                                    <%= parseFloat(product.price).toFixed(2) %>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" onclick="removeFromWishlist('<%= product.name %>')">
+                                        Remove
+                                    </button>
+                                    <button class="btn btn-primary ml-2"
+                                        onclick="addToCartFromWishlist('<%= product.name %>')">
+                                        Add to Cart
+                                    </button>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-warning" onclick="emptyWishlist()">Empty Wishlist</button>
+                <button class="btn btn-success ml-2" onclick="addAllToCart()">Add All to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to remove a product from the wishlist
+        function removeFromWishlist(productName) {
+            // Retrieve wishlist from localStorage
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+            // Filter out the product to be removed
+            wishlist = wishlist.filter(product => product.name !== productName);
+
+            // Update wishlist in localStorage
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+
+            // Update wishlist UI
+            updateWishlistUI();
+        }
+
+        // Function to add product to cart
+        function addToCartFromWishlist(productName) {
+            // Retrieve wishlist from localStorage
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+            // Find the product in wishlist
+            const product = wishlist.find(item => item.name === productName);
+
+            // Add the product to cart
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(product);
+
+            // Update cart in localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Remove the product from wishlist after adding to cart
+            wishlist = wishlist.filter(item => item.name !== productName);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+
+            // Update cart UI
+            updateCartUI();
+
+            // Update wishlist UI
+            updateWishlistUI();
+        }
+
+        // Function to update the wishlist UI
+        function updateWishlistUI() {
+    // Retrieve wishlist from localStorage
+    const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+    // Get the wishlist notification element
+    const wishlistNotification = document.getElementById('wish-notification');
+
+    // Update the wishlist notification count
+    if (wishlistNotification) {
+        wishlistNotification.textContent = wishlist.length.toString() || '0'; // Display the number of products in the wishlist or '0' if empty
+    }
+
+    // Get the wishlist table body element
+    const wishlistTableBody = document.querySelector('tbody');
+
+    // Check if the tbody element exists
+    if (wishlistTableBody) {
+        // Clear the current content of the wishlist table body
+        wishlistTableBody.innerHTML = '';
+
+        // Populate the wishlist table body with updated wishlist data
+        wishlist.forEach(product => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><img src="${product.imageUrl}" alt="${product.name}" style="max-width: 100px;"></td>
+                <td>${product.name}</td>
+                <td>$${parseFloat(product.price).toFixed(2)}</td>
+                <td>
+                    <button class="btn btn-danger" onclick="removeFromWishlist('${product.name}')">
+                        Remove
+                    </button>
+                    <button class="btn btn-primary ml-2" onclick="addToCartFromWishlist('${product.name}')">
+                        Add to Cart
+                    </button>
+                </td>
+            `;
+            wishlistTableBody.appendChild(row);
+        });
+    }
+}
+
+        // Function to empty the wishlist
+        function emptyWishlist() {
+            localStorage.removeItem('wishlist');
+            updateWishlistUI(); // Call updateWishlistUI() after removing wishlist items
+        }
+
+        // Function to add all products to cart
+        function addAllToCart() {
+            // Retrieve wishlist from localStorage
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+            // Retrieve cart from localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Add all products from wishlist to cart
+            cart = cart.concat(wishlist);
+
+            // Clear the wishlist
+            localStorage.removeItem('wishlist');
+
+            // Update cart in localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Update cart UI
+            updateCartUI();
+
+            // Update wishlist UI
+            updateWishlistUI();
+        }
+    </script>
+
+</body>
+
+</html>
