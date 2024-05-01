@@ -26,7 +26,49 @@
 
 <body>
 
-
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Check if JWT token exists in local storage
+            const token = localStorage.getItem('token');
+            if (token) {
+                // User is authenticated, display "Profile" button
+                document.getElementById('signin-btn').style.display = 'none';
+                const profileBtn = document.getElementById('profile-btn');
+                profileBtn.style.display = 'inline-block';
+    
+                // Create and append logout button
+                const logoutBtn = document.createElement('button');
+                logoutBtn.classList.add('btn', 'btn-outline-primary', 'fw-500', 'rounded', 'd-none'); // initially hide the logout button
+                logoutBtn.innerHTML = '<i class="fa-solid fa-sign-out-alt me-lg-2"></i><p class="d-none d-lg-inline">Logout</p>';
+                profileBtn.appendChild(logoutBtn);
+    
+                // Add event listener for hover
+                profileBtn.addEventListener('mouseenter', function() {
+                    logoutBtn.classList.remove('d-none'); // show the logout button on hover
+                });
+    
+                // Add event listener for mouse leave to hide logout button
+                profileBtn.addEventListener('mouseleave', function() {
+                    logoutBtn.classList.add('d-none'); // hide the logout button when mouse leaves
+                });
+    
+                // Add click event listener to logout button
+                logoutBtn.addEventListener('click', function() {
+                    // Perform logout action (clear token, redirect to logout route, etc.)
+                    localStorage.removeItem('token');
+                    // Redirect to logout route
+                    window.location.href = '/users/login';
+                });
+            } else {
+                // User is not authenticated, display "Sign in" button
+                document.getElementById('signin-btn').style.display = 'inline-block';
+                document.getElementById('profile-btn').style.display = 'none';
+            }
+        });
+    </script>
+    
+    
+    
 
     <div class="container pt-3">
 
@@ -42,10 +84,16 @@
                     class="fa-solid fa-magnifying-glass rounded d-none d-lg-block"></i></button>
             
             <div class="ms-md-5 mt-2 mt-md-0">
-                <a type="button" class="btn btn-outline-primary fw-500 rounded " href="/users/login">
-                        <i class="fa-solid fa-user me-lg-2"></i>
-                        <p class="d-none d-lg-inline">Sign in</p>
-                    </a>
+                <a type="button" id="signin-btn" class="btn btn-outline-primary fw-500 rounded" href="/users/login">
+                    <i class="fa-solid fa-user me-lg-2"></i>
+                    <p class="d-none d-lg-inline">Sign in</p>
+                </a>
+                <a type="button" id="profile-btn" class="btn btn-outline-primary fw-500 rounded" href="/users/login" style="display: none;">
+                    <i class="fa-solid fa-user me-lg-2"></i>
+                    <p class="d-none d-lg-inline">Profile</p>
+                </a>
+                
+                
                 <a type="button" class="btn btn-outline-primary fw-500 rounded" onclick="goToWishlist()">
                     <i class="fa-solid fa-heart me-lg-2"></i>
                     <span id="wish-notification" class="wish-notification"></span> <!-- Notification area -->

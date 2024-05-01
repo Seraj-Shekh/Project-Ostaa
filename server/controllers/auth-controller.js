@@ -145,12 +145,14 @@ const login = async (req, res) => {
         // Update the user record in the database with the generated token
         await pool.query('UPDATE users SET token = $1 WHERE id = $2', [token, user.rows[0].id]);
 
+        // Send token back to client
         res.json({ success: true, token });
     } catch (error) {
         console.error(error.message);
         return res.status(500).json({ success: false, error: error.message });
     }
 };
+;
 
 module.exports = {
     login,

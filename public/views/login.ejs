@@ -39,19 +39,9 @@
       <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategories" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Categories
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownCategories">
-              <li><a class="dropdown-item" href="electronics.html">Electronics</a></li>
-              <li><a class="dropdown-item" href="#">Clothing & Accessories</a></li>
-              <li><a class="dropdown-item" href="#">Tools & Furniture</a></li>
-              <li><a class="dropdown-item" href="#">Study Materials</a></li>
-            </ul>
-          </li>
+         
           <li class="nav-item">
             <a class="nav-link" href="#">Blog</a>
           </li>
@@ -120,6 +110,8 @@
       if (data.success) {
         // Display success message
         alert('Login successful');
+        // Save token to localStorage
+        localStorage.setItem('token', data.token);
         // Redirect to home page
         window.location.href = '/';
       } else {
@@ -132,7 +124,25 @@
       alert('An error occurred. Please try again later.');
     }
   });
+
+  // Check authentication status on page load
+  document.addEventListener("DOMContentLoaded", function() {
+    const token = localStorage.getItem('token');
+    const signinButton = document.getElementById('signin-btn');
+    const profileButton = document.getElementById('profile-btn');
+
+    if (token) {
+      // User is authenticated, display "Profile" button
+      signinButton.style.display = 'none';
+      profileButton.style.display = 'inline-block';
+    } else {
+      // User is not authenticated, display "Sign in" button
+      signinButton.style.display = 'inline-block';
+      profileButton.style.display = 'none';
+    }
+  });
 </script>
+
 
 
   <!-- Footer -->
@@ -142,7 +152,7 @@
         <!-- Store Section -->
         <div class="col-lg-4 mb-3">
           <div class="col-md-6 mb-3">
-            <img src="img/OstaaLogo.png" alt="Footer Logo" class="footer-logo">
+            <img src="/img/OstaaLogo.png" alt="Footer Logo" class="footer-logo">
           </div>
           <p class="mt-4 text-muted">© All rights reserved.</p>
         </div>
