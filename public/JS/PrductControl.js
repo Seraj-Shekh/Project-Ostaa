@@ -4,9 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
     updateWishlistUI(); // Update wishlist UI including the wishlist notification count on page load
 });
 
-async function fetchProducts() {
+async function fetchProducts(query = '') {
     try {
-        const response = await fetch(`/products`);
+        let url = '/products';
+        if (query) {
+            url += `/search?query=${encodeURIComponent(query)}`;
+        }
+        const response = await fetch(url);
         const products = await response.json();
         const productsContainer = document.getElementById('product-row');
         productsContainer.innerHTML = generateProductCards(products);
@@ -25,6 +29,7 @@ async function fetchProducts() {
         console.error('Error fetching products:', error);
     }
 }
+
 // Function to fetch search results
 async function fetchSearchResults(query) {
     try {
@@ -37,21 +42,7 @@ async function fetchSearchResults(query) {
     }
 }
 
-// Modify fetchProducts() to handle search results fetching as well
-async function fetchProducts(query = '') {
-    try {
-        let url = '/products';
-        if (query) {
-            url += `/search?query=${encodeURIComponent(query)}`;
-        }
-        const response = await fetch(url);
-        const products = await response.json();
-        const productsContainer = document.getElementById('product-row');
-        productsContainer.innerHTML = generateProductCards(products);
-    } catch (error) {
-        console.error('Error fetching products:', error);
-    }
-}
+
 
 
 
