@@ -44,7 +44,7 @@ const forgotPassword = async (req, res) => {
         const resetLink = `http://localhost:3000/users/reset-password/${resetToken}`;
         await sendEmail(email, 'Password Reset', `Click on the following link to reset your password: ${resetLink}`);
 
-        res.json({ success: true, message: 'Password reset link sent successfully' });
+        res.send('Password reset link sent to your email. Please check your inbox or spam folder.')
     } catch (error) {
         console.error(error.message);
         return res.status(500).json({ success: false, error: 'An error occurred' });
@@ -74,12 +74,22 @@ const resetPassword = async (req, res) => {
         // Update user's password and clear the reset token
         await pool.query('UPDATE users SET password = $1, reset_token = NULL WHERE email = $2', [hashedPassword, email]);
         
-        res.json({ success: true, message: 'Password reset successfully' });
+        // Send success message along with JavaScript redirect instruction
+        res.send(`
+            <p>Password reset successful. You will be redirected to the login page shortly.</p>
+            <script>
+                setTimeout(function() {
+                    window.location.href = '/users/login';
+                }, 3000); // Redirect after 3 seconds
+            </script>
+        `);
+        
     } catch (error) {
         console.error(error.message);
         return res.status(500).json({ success: false, error: 'An error occurred' });
     }
 };
+
 
 
 

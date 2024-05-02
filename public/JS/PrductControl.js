@@ -77,7 +77,7 @@ async function addToCart(event) {
 
     //check if the user is logged in
     const token = localStorage.getItem('token')
-    if(token){
+    if(!token){
         alert('You need to login first');
         return;
     }
@@ -114,7 +114,7 @@ async function addToWishlist(event) {
 
        //check if the user is logged in
        const token = localStorage.getItem('token')
-       if(token){
+       if(!token){
            alert('You need to login first');
            return;
        }
