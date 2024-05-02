@@ -57,6 +57,59 @@
     </div>
 
     <script>
+        // Function to update the cart UI
+function updateCartUI() {
+    // Retrieve cart from localStorage
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Get the cart notification element
+    const cartNotification = document.getElementById('cart-notification');
+
+    // Update the cart notification count
+    if (cartNotification) {
+        cartNotification.textContent = cart.length.toString() || '0'; // Display the number of products in the cart or '0' if empty
+    }
+
+    // Get the cart table body element
+    const cartTableBody = document.querySelector('tbody');
+
+    // Check if the tbody element exists
+    if (cartTableBody) {
+        // Clear the current content of the cart table body
+        cartTableBody.innerHTML = '';
+
+        // Populate the cart table body with updated cart data
+        let subtotal = 0; // Initialize subtotal
+        cart.forEach(product => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><img src="${product.imageUrl}" alt="${product.name}" style="max-width: 100px;"></td>
+                <td>${product.name}</td>
+                <td>$${parseFloat(product.price).toFixed(2)}</td>
+                <td><button class="btn btn-danger" onclick="removeFromCart('${product.name}')">Remove</button></td>
+            `;
+            cartTableBody.appendChild(row);
+
+            // Add the price of each product to the subtotal
+            subtotal += parseFloat(product.price);
+        });
+
+        // Update subtotal in the order summary
+        const subtotalElement = document.getElementById('subtotal');
+        if (subtotalElement) {
+            subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+        }
+
+        // Calculate total (assuming no discounts for now)
+        const total = subtotal;
+
+        // Update total in the order summary
+        const totalElement = document.getElementById('total');
+        if (totalElement) {
+            totalElement.textContent = `$${total.toFixed(2)}`;
+        }
+    }
+}
         // Function to remove a product from the wishlist
         function removeFromWishlist(productName) {
             // Retrieve wishlist from localStorage
