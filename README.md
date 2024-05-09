@@ -1,3 +1,4 @@
+Demo Video: https://screenrec.com/share/DasLtbknYo
 Second-Hand E-Commerce Website(OSTAA)
 Welcome to our second-hand e-commerce website! This repository contains the codebase for our platform, where users can buy and sell second-hand items. Follow the steps below to run and see the website in action:
 
